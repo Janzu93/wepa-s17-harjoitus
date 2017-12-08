@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Luo uusi artikkeli</title>
+</head>
+<body>
+    <h1>Luo uusi artikkeli</h1>
+    <form th:action="@{/uutiset/uusi}" method="post">
+        <label>Otsikko</label>
+        <input type="text" name="otsikko"/>
+        <label>Ingressi</label>
+        <input type="text" name="ingressi"/>
+        <label>Sisältö</label>
+        <textarea type="text" title="sisältö" name="sisalto">Sisaltö tähän</textarea>
+        <input type="submit" th:label="Tallenna"/>
+    </form>
+</body>
+</html>

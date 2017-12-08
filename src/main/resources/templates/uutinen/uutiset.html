@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="Uutiset">Title</title>
+</head>
+<body>
+<ul>
+    <li th:each="uutinen : ${uutiset}">
+        <span th:text="${uutinen.otsikko}"></span>
+        <span th:text="${uutinen.ingressi}"></span>
+        <span th:text="${uutinen.sisalto}"></span>
+        <span th:text="${uutinen.julkaisupaiva}"></span>
+        <form th:action="@{/uutiset/} + ${uutinen.id} + @{/delete}" method="post">
+            <input type="submit" value="Poista!"/>
+        </form>
+        <form th:action="@{/uutiset/} + ${uutinen.id} + @{/muokkaa}" method="get">
+            <input type="submit" value="Muokkaa"/>
+        </form>
+    </li>
+</ul>
+</body>
+</html>

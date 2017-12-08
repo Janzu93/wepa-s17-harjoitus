@@ -10,6 +10,9 @@
         <form th:action="@{/kirjoittajat/} + ${kirjoittaja.id} + @{/delete}" th:method="post">
             <input type="submit" value="Poista!"/>
         </form>
+        <form th:action="@{/kirjoittajat/} + ${kirjoittaja.id} + @{/muokkaa}" th:method="get">
+            <input type="submit" value="Muokkaa"/>
+        </form>
     </li>
 </ul>
 </body>

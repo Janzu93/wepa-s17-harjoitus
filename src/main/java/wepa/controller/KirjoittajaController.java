@@ -22,12 +22,18 @@ public class KirjoittajaController {
     @GetMapping("/kirjoittajat")
     public String kirjoittajatList(Model model) {
         model.addAttribute("kirjoittajat", kirjoittajaRepository.findAll());
-        return "kirjoittajat";
+        return "kirjoittaja/kirjoittajat";
     }
 
     @GetMapping("kirjoittajat/uusi")
     public String luontiSivu() {
-        return "luoKirjoittaja";
+        return "kirjoittaja/luoKirjoittaja";
+    }
+
+    @GetMapping("kirjoittajat/{id}/muokkaa")
+    public String muokkausSivu(Model model, @PathVariable Long id) {
+        model.addAttribute("id", id);
+        return "kirjoittaja/muokkaaKirjoittaja";
     }
 
     @PostMapping("/kirjoittajat/uusi")
@@ -42,7 +48,7 @@ public class KirjoittajaController {
         return "redirect:/kirjoittajat";
     }
 
-    @PostMapping("kirjoittajat/{id}")
+    @PostMapping("kirjoittajat/{id}/muokkaa")
     public String muokkaa(@PathVariable Long id, @RequestParam String nimi) {
         kirjoittajaService.edit(id, nimi);
         return "redirect:/kirjoittajat";

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Muokkaa Kirjoittajaa</title>
+</head>
+<body>
+<form th:action="@{/kirjoittajat/} + ${id} + @{/muokkaa}" method="post">
+    <label>Nimi:</label>
+    <input type="text" name="nimi"/>
+    <input type="submit" value="Tallenna!"/>
+</form>
+</body>
+</html>

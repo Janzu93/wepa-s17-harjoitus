@@ -32,6 +32,7 @@ public class KirjoittajaService {
         if (kirjoittajaRepository.exists(id)) {
             Kirjoittaja kirjoittaja = kirjoittajaRepository.findOne(id);
             kirjoittaja.setNimi(nimi);
+            kirjoittajaRepository.save(kirjoittaja);
         }
     }
 }

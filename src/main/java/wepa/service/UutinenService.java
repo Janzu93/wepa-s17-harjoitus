@@ -19,6 +19,13 @@ public class UutinenService {
         return uutinenRepository.findAll();
     }
 
+    public Uutinen findOne(Long id) {
+        if (uutinenRepository.exists(id)) {
+            return uutinenRepository.findOne(id);
+        }
+        return null;
+    }
+
     public void create(String otsikko, String ingressi, String sisalto) {
         uutinenRepository.save(new Uutinen(otsikko, ingressi, sisalto, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
     }

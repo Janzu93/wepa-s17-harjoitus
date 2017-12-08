@@ -1,4 +1,4 @@
-# Wepa-harjoitus-s17
+# wepa-s17-harjoitus
 
 Exercise project for web programming course on Helsinki University
 

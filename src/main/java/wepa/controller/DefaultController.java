@@ -8,6 +8,6 @@ public class DefaultController {
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/uutiset";
+        return "index";
     }
 }

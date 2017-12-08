@@ -25,6 +25,9 @@ public class Uutinen extends AbstractPersistable<Long> {
     @ManyToMany(mappedBy = "uutiset")
     private List<Kirjoittaja> kirjoittajat;
 
+    @ManyToMany(mappedBy = "uutiset")
+    private List<Kategoria> kategoriat;
+
     public Uutinen(String otsikko, String ingressi, String sisalto, String julkaisupaiva) {
         this.otsikko = otsikko;
         this.ingressi = ingressi;

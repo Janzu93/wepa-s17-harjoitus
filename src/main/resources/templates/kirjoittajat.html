@@ -7,6 +7,9 @@
 <ul>
     <li th:each="kirjoittaja : ${kirjoittajat}">
         <span th:text="${kirjoittaja.nimi}"></span>
+        <form th:action="@{/kirjoittajat/} + ${kirjoittaja.id} + @{/delete}" th:method="post">
+            <input type="submit" value="Poista!"/>
+        </form>
     </li>
 </ul>
 </body>

@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -23,10 +24,10 @@ public class Uutinen extends AbstractPersistable<Long> {
     private String julkaisupaiva;
 
     @ManyToMany(mappedBy = "uutiset")
-    private List<Kirjoittaja> kirjoittajat;
+    private List<Kirjoittaja> kirjoittajat = new ArrayList<>();
 
     @ManyToMany(mappedBy = "uutiset")
-    private List<Kategoria> kategoriat;
+    private List<Kategoria> kategoriat = new ArrayList<>();
 
     public Uutinen(String otsikko, String ingressi, String sisalto, String julkaisupaiva) {
         this.otsikko = otsikko;

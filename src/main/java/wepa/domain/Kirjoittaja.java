@@ -1,22 +1,23 @@
 package wepa.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
+@Entity
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Entity
-public class Artikkeli extends AbstractPersistable<Long> {
+public class Kirjoittaja extends AbstractPersistable<Long>{
 
-    private String otsikko;
-    private String ingressi;
-//    private String kuva;
-    private String sisalto;
-    private String julkaisupaiva;
+    private String nimi;
+
+    @ManyToMany
+    private List<Uutinen> uutiset;
 }

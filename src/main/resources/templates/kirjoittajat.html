@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="Kirjoittajat">Title</title>
+</head>
+<body>
+<ul>
+    <li th:each="kirjoittaja : ${kirjoittajat}">
+        <span th:text="${kirjoittaja.nimi}"></span>
+    </li>
+</ul>
+</body>
+</html>

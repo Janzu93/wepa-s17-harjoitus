@@ -7,6 +7,7 @@ import wepa.domain.FileObject;
 import wepa.repository.FileObjectRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class FileObjectService {
@@ -23,15 +24,17 @@ public class FileObjectService {
     }
 
     public void save(MultipartFile file) throws IOException{
-        FileObject fo = new FileObject();
-        fo.setContent(file.getBytes());
-
         if (file.getContentType().equals("image/png")) {
+            FileObject fo = new FileObject();
+            fo.setContent(file.getBytes());
+            fo.setMediaType(file.getContentType());
+            fo.setName(file.getName());
+            fo.setSize(file.getSize());
             fileObjectRepository.save(fo);
         }
     }
 
-    public void findAll() {
-        fileObjectRepository.findAll();
+    public List<FileObject> findAll() {
+        return fileObjectRepository.findAll();
     }
 }

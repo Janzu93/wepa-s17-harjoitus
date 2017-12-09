@@ -3,14 +3,25 @@ package wepa.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import wepa.service.FileObjectService;
 import wepa.service.UutinenService;
+
+import javax.transaction.Transactional;
+import java.io.IOException;
 
 @Controller
 public class UutinenController {
 
     @Autowired
     private UutinenService uutinenService;
+
+    @Autowired
+    private FileObjectService fileObjectService;
 
     @GetMapping("/uutiset/uusi")
     public String luontiSivu() {
@@ -24,7 +35,9 @@ public class UutinenController {
     }
 
     @PostMapping("/uutiset/uusi")
-    public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto) {
+    @Transactional
+    public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto, @RequestParam("file") MultipartFile file) throws IOException{
+        fileObjectService.save(file);
         uutinenService.create(otsikko, ingressi, sisalto);
         return "redirect:/uutiset";
     }

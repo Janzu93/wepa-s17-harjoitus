@@ -5,11 +5,12 @@
 </head>
 <body>
     <h1>Luo uusi uutinen</h1>
-    <form th:action="@{/uutiset/uusi}" method="post">
+    <form th:action="@{/uutiset/uusi}" method="post" enctype="multipart/form-data">
         <label>Otsikko:</label>
         <input type="text" name="otsikko"/>
         <label>Ingressi:</label>
         <input type="text" name="ingressi"/>
+        <input type="file" name="file"/>
         <label>Sisältö:</label>
         <textarea title="sisältö" name="sisalto">Sisaltö tähän</textarea>
         <input type="submit" value="Tallenna!"/>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Muokkaa Kirjoittajaa</title>
+    <title>Luo uusi Kategoria</title>
 </head>
 <body>
-<form th:action="@{/kirjoittajat/} + ${kirjoittaja.id} + @{/muokkaa}" method="post">
+<h1>Luo uusi Kategoria</h1>
+<form th:action="@{/kategoriat/uusi}" method="post">
     <label>Nimi:</label>
-    <input type="text" th:value="${kirjoittaja.nimi}" name="nimi"/>
+    <input type="text" name="nimi"/>
     <input type="submit" value="Tallenna!"/>
 </form>
 </body>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kategoriat</title>
+</head>
+<body>
+<ul>
+    <li th:each="kategoria : ${kategoriat}">
+        <span th:text="${kategoria.nimi}"></span>
+        <form th:action="@{/kategoriat/} + ${kategoria.id} + @{/delete}" method="post">
+            <input type="submit" value="Poista!"/>
+        </form>
+        <form th:action="@{/kategoriat/} + ${kategoria.id} + @{/muokkaa}" method="get">
+            <input type="submit" value="Muokkaa"/>
+        </form>
+    </li>
+</ul>
+</body>
+</html>

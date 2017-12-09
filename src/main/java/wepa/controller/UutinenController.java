@@ -26,7 +26,7 @@ public class UutinenController {
     @PostMapping("/uutiset/uusi")
     public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto) {
         uutinenService.create(otsikko, ingressi, sisalto);
-        return "redirect:/";
+        return "redirect:/uutiset";
     }
 
     @PostMapping("/uutiset/{id}/delete")

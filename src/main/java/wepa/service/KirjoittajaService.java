@@ -18,6 +18,13 @@ public class KirjoittajaService {
         return kirjoittajaRepository.findAll();
     }
 
+    public Kirjoittaja findOne(Long id) {
+        if (kirjoittajaRepository.exists(id)) {
+            return kirjoittajaRepository.findOne(id);
+        }
+        return null;
+    }
+
     public void create(String nimi) {
         kirjoittajaRepository.save(new Kirjoittaja(nimi));
     }

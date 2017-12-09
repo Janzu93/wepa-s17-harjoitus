@@ -42,6 +42,8 @@ public class UutinenService {
             uutinen.setOtsikko(otsikko);
             uutinen.setIngressi(ingressi);
             uutinen.setSisalto(sisalto);
+
+            uutinenRepository.save(uutinen);
         }
     }
 }

@@ -19,4 +19,8 @@ public class Kategoria extends AbstractPersistable<Long>{
 
     @ManyToMany
     private List<Uutinen> uutiset;
+
+    public Kategoria(String nimi) {
+        this.nimi = nimi;
+    }
 }

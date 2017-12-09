@@ -7,21 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import wepa.repository.KirjoittajaRepository;
 import wepa.service.KirjoittajaService;
 
 @Controller
 public class KirjoittajaController {
 
     @Autowired
-    private KirjoittajaRepository kirjoittajaRepository;
-
-    @Autowired
     private KirjoittajaService kirjoittajaService;
 
     @GetMapping("/kirjoittajat")
     public String kirjoittajatList(Model model) {
-        model.addAttribute("kirjoittajat", kirjoittajaRepository.findAll());
+        model.addAttribute("kirjoittajat", kirjoittajaService.findAll());
         return "kirjoittaja/kirjoittajat";
     }
 
@@ -32,7 +28,7 @@ public class KirjoittajaController {
 
     @GetMapping("kirjoittajat/{id}/muokkaa")
     public String muokkausSivu(Model model, @PathVariable Long id) {
-        model.addAttribute("id", id);
+        model.addAttribute("kirjoittaja", kirjoittajaService.findOne(id));
         return "kirjoittaja/muokkaaKirjoittaja";
     }
 

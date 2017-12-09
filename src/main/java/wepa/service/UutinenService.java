@@ -2,7 +2,6 @@ package wepa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import wepa.domain.Uutinen;
 import wepa.repository.UutinenRepository;
 

@@ -23,6 +23,12 @@ public class FileObjectService {
         return null;
     }
 
+    public void delete(Long id) {
+        if (fileObjectRepository.exists(id)) {
+            fileObjectRepository.delete(id);
+        }
+    }
+
     public void save(MultipartFile file) throws IOException{
         if (file.getContentType().equals("image/png")) {
             FileObject fo = new FileObject();

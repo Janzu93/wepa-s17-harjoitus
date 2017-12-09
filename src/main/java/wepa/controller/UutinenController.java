@@ -45,6 +45,7 @@ public class UutinenController {
     @PostMapping("/uutiset/{id}/delete")
     public String poista(@PathVariable Long id) {
         uutinenService.delete(id);
+        fileObjectService.delete(id);
         return "redirect:/uutiset";
     }
 

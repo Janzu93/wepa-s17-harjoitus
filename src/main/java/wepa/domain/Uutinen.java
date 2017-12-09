@@ -20,7 +20,8 @@ public class Uutinen extends AbstractPersistable<Long> {
 
     private String otsikko;
     private String ingressi;
-//    private String kuva;
+    private FileObject kuva;
+
     private String sisalto;
     private LocalDate julkaisupaiva;
 

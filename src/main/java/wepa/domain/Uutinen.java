@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Uutinen extends AbstractPersistable<Long> {
     private String ingressi;
 //    private String kuva;
     private String sisalto;
-    private String julkaisupaiva;
+    private LocalDate julkaisupaiva;
 
     @ManyToMany(mappedBy = "uutiset")
     private List<Kirjoittaja> kirjoittajat = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Uutinen extends AbstractPersistable<Long> {
     @ManyToMany(mappedBy = "uutiset")
     private List<Kategoria> kategoriat = new ArrayList<>();
 
-    public Uutinen(String otsikko, String ingressi, String sisalto, String julkaisupaiva) {
+    public Uutinen(String otsikko, String ingressi, String sisalto, LocalDate julkaisupaiva) {
         this.otsikko = otsikko;
         this.ingressi = ingressi;
         this.sisalto = sisalto;

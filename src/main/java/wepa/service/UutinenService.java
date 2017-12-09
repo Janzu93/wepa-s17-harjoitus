@@ -2,9 +2,11 @@ package wepa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wepa.domain.Kirjoittaja;
 import wepa.domain.Uutinen;
 import wepa.repository.UutinenRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -27,7 +29,7 @@ public class UutinenService {
     }
 
     public void create(String otsikko, String ingressi, String sisalto) {
-        uutinenRepository.save(new Uutinen(otsikko, ingressi, sisalto, LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))));
+        uutinenRepository.save(new Uutinen(otsikko, ingressi, sisalto, LocalDate.now()));
     }
 
     public void delete(Long id) {

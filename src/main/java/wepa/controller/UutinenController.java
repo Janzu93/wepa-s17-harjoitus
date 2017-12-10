@@ -30,36 +30,43 @@ public class UutinenController {
     @Autowired
     private FileObjectService fileObjectService;
 
-    @GetMapping("/")
-    public String etusivu(Model model) {
-        Pageable pageable = PageRequest.of(0,5, Sort.Direction.DESC,"julkaisupaiva");
-        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
-        return "index";
+    /*
+    Tätä metodia kutsutaan kun tarvitaan tieto ollaanko viimeisellä sivulla.
+    Algoritmi toimii niin että pageablelta pyydettyyn sivunumeroon (0-indeksöity) lisätään 1
+    jotta saadaan aito sivunumero, tämä kerrottaessa sivunkoolla (getPageSize()) saadaan luku
+    jonka vastatessa uutistenmäärää (uutinenRepository.count()) tiedetään että sivuja ei enää ole
+    */
+    public boolean sivujaJaljella(Pageable pageable) {
+        return (pageable.getPageNumber()+1)*pageable.getPageSize() < uutinenRepository.count();
     }
+
+    //Uuden uutisen luontisivu luodaan pyydettäessä
     @GetMapping("/uutiset/uusi")
     public String luontiSivu() {
         return "uutinen/luoUutinen";
     }
 
-    @GetMapping("/uutiset")
-    public String uutinenList(Model model) {
-        Pageable pageable = PageRequest.of(0,5, Sort.Direction.DESC,"julkaisupaiva");
-        model.addAttribute("pageable", pageable);
-        model.addAttribute("sivujaJaljella", (pageable.getPageNumber()+1) * 5 < uutinenRepository.count());
-        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
-        return "uutinen/uutiset";
-    }
-
+    /*
+    Listataan uutiset
+    pageable annetaan attribuuttina mallille jotta voimme varmistaa pageable.hasPrevious() metodikutsulla
+    olemmeko ensimmäisellä sivulla
+    sivujaJaljella metodi palauttaa totuusarvon jonka avulla tiedetään onko sivuja lisää. Templatessa näitä käytetään
+    nappuloiden luomiseen tarvittaessa.
+     */
     @GetMapping("/uutiset/sivu/{sivuNumero}")
     public String uutinenList(Model model, @PathVariable int sivuNumero) {
         Pageable pageable = PageRequest.of(sivuNumero,5, Sort.Direction.DESC,"julkaisupaiva");
         model.addAttribute("pageable", pageable);
-        model.addAttribute("sivujaJaljella", (pageable.getPageNumber()+1) * 5 < uutinenRepository.count());
+        model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
         model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
         return "uutinen/uutiset";
     }
 
-
+    /*
+    Uutisten tallennus pyydetäessä. Pyyntö lähetetään Servicelle joka tallettaa tiedot. Päiväystä ei tarvitse syöttää
+    parametrina, koska voimme käyttää Javan tarjoamaa LocalDate.now() metodia luontipäivän listaamiseen.
+    Tiedosto lähetetään fileObjectServicelle tallennettavaksi.
+     */
     @PostMapping("/uutiset/uusi")
     @Transactional
     public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto, @RequestParam("file") MultipartFile file) throws IOException{
@@ -68,19 +75,30 @@ public class UutinenController {
         return "redirect:/uutiset";
     }
 
+    /*
+    Uutinen ja sen kuva poistetaan. Spring 2 omituisuuksista johtuen fileObjectilla ja Uutisella on jostain syystä
+    yhteinen juokseva ID numerointi, tämän vuoksi service poistaa id-1.
+     */
     @PostMapping("/uutiset/{id}/delete")
+    @Transactional
     public String poista(@PathVariable Long id) {
         uutinenService.delete(id);
         fileObjectService.delete(id-1);
         return "redirect:/uutiset";
     }
 
+    /*
+    Uutisten muokkaussivun luonti pyydettäessä
+     */
     @GetMapping("/uutiset/{id}/muokkaa")
     public String muokkausSivu(Model model, @PathVariable Long id) {
         model.addAttribute("uutinen", uutinenService.findOne(id));
         return "uutinen/muokkaaUutinen";
     }
 
+    /*
+        Uutisten muokkaus, kuvia ei tarvitse muokata ainakaan tällä hetkellä.
+     */
     @PostMapping("/uutiset/{id}/muokkaa")
     public String muokkaa(@PathVariable Long id, @RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto) {
         uutinenService.edit(id, otsikko, ingressi, sisalto);

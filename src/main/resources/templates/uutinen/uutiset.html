@@ -7,23 +7,7 @@
 <body>
 <ul>
     <li th:each="uutinen : ${uutiset}">
-        <p th:text="@{Julkaistu:} + ' ' + ${uutinen.julkaisupaiva}"></p>
-        <h1 th:text="${uutinen.otsikko}"></h1>
-        <h2 th:text="${uutinen.ingressi}"></h2>
-        <p th:text="${uutinen.sisalto}"></p>
-        <p>Kirjoittajat</p>
-        <ul>
-            <li th:each="kirjoittaja : ${uutinen.kirjoittajat}">
-                <span th:text="${kirjoittaja.nimi}"></span>
-            </li>
-        </ul>
-        <img th:src="@{/images/} + ${uutinen.id-1}"/>
-        <form th:action="@{/uutiset/} + ${uutinen.id} + @{/delete}" method="post">
-            <input type="submit" value="Poista!"/>
-        </form>
-        <form th:action="@{/uutiset/} + ${uutinen.id} + @{/muokkaa}" method="get">
-            <input type="submit" value="Muokkaa"/>
-        </form>
+        <a th:href="@{/uutiset/} + ${uutinen.id}"><p th:text="${uutinen.julkaisupaiva} + ' - ' + ${uutinen.otsikko}"></p></a>
     </li>
     <form th:if="${sivujaJaljella}"
           th:action="@{/uutiset/sivu/} + ${pageable.pageNumber+1}" method="get">

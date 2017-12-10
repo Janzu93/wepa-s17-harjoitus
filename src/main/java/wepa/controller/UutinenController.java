@@ -118,4 +118,10 @@ public class UutinenController {
         uutinenService.edit(id, otsikko, ingressi, sisalto);
         return "redirect:/uutiset/sivu/0/otsikko";
     }
+
+    @GetMapping("/uutiset/{id}")
+    public String uutinen(Model model, @PathVariable Long id) {
+        model.addAttribute("uutinen", uutinenService.findOne(id));
+        return "uutinen/uutinen";
+    }
 }

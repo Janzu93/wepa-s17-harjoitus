@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:title="${uutinen.otsikko}"></title>
+</head>
+<body>
+    <h3 th:text="${uutinen.julkaisupaiva}"></h3>
+    <ul>
+        <li th:each="kirjoittaja : ${uutinen.kirjoittajat}"></li>
+    </ul>
+    <h1 th:text="${uutinen.otsikko}"></h1>
+    <h2 th:text="${uutinen.ingressi}"></h2>
+    <img th:src="@{/images/} + ${uutinen.id-1}">;
+</body>
+</html>

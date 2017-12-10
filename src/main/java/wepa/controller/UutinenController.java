@@ -46,6 +46,15 @@ public class UutinenController {
         return "uutinen/luoUutinen";
     }
 
+    @GetMapping("/")
+    public String etusivu(Model model) {
+        Pageable pageable = PageRequest.of(0,5,Sort.Direction.DESC, "id");
+        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
+
+        return "index";
+    }
+
+
     /*
     Listataan uutiset
     pageable annetaan attribuuttina mallille jotta voimme varmistaa pageable.hasPrevious() metodikutsulla
@@ -53,9 +62,14 @@ public class UutinenController {
     sivujaJaljella metodi palauttaa totuusarvon jonka avulla tiedetään onko sivuja lisää. Templatessa näitä käytetään
     nappuloiden luomiseen tarvittaessa.
      */
-    @GetMapping("/uutiset/sivu/{sivuNumero}/{sort}")
-    public String uutinenList(Model model, @PathVariable int sivuNumero, @PathVariable String sort) {
-        Pageable pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, sort);
+    @GetMapping("/uutiset/sivu/{sivuNumero}/{sort}/{suunta}")
+    public String uutinenList(Model model, @PathVariable int sivuNumero, @PathVariable String sort, @PathVariable String suunta) {
+        Pageable pageable;
+        if (suunta.equals("asc")) {
+            pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.ASC, sort);
+        } else {
+            pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, sort);
+        }
         model.addAttribute("pageable", pageable);
         model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
         model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
@@ -72,7 +86,7 @@ public class UutinenController {
     public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto, @RequestParam("file") MultipartFile file, @RequestParam String kirjoittajat) throws IOException {
         fileObjectService.save(file);
         uutinenService.create(otsikko, ingressi, sisalto, kirjoittajat);
-        return "redirect:/uutiset/sivu/0/otsikko";
+        return "redirect:/uutiset/sivu/0/otsikko/asc";
     }
 
     /*
@@ -84,7 +98,7 @@ public class UutinenController {
     public String poista(@PathVariable Long id) {
         uutinenService.delete(id);
         fileObjectService.delete(id - 1);
-        return "redirect:/uutiset/sivu/0/otsikko";
+        return "redirect:/uutiset/sivu/0/otsikko/asc";
     }
 
     /*

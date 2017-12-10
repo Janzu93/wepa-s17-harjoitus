@@ -18,14 +18,14 @@ public class KategoriaService {
     }
 
     public void delete(Long id) {
-        if (kategoriaRepository.exists(id)) {
-            kategoriaRepository.delete(id);
+        if (kategoriaRepository.existsById(id)) {
+            kategoriaRepository.deleteById(id);
         }
     }
 
     public void edit(Long id, String nimi) {
-        if (kategoriaRepository.exists(id)) {
-            Kategoria kategoria = kategoriaRepository.findOne(id);
+        if (kategoriaRepository.existsById(id)) {
+            Kategoria kategoria = kategoriaRepository.getOne(id);
             kategoria.setNimi(nimi);
             kategoriaRepository.save(kategoria);
         }
@@ -36,8 +36,8 @@ public class KategoriaService {
     }
 
     public Kategoria findOne(Long id) {
-        if (kategoriaRepository.exists(id)) {
-            return kategoriaRepository.findOne(id);
+        if (kategoriaRepository.existsById(id)) {
+            return kategoriaRepository.getOne(id);
         }
         return null;
     }

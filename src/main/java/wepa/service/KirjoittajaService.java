@@ -19,8 +19,8 @@ public class KirjoittajaService {
     }
 
     public Kirjoittaja findOne(Long id) {
-        if (kirjoittajaRepository.exists(id)) {
-            return kirjoittajaRepository.findOne(id);
+        if (kirjoittajaRepository.existsById(id)) {
+            return kirjoittajaRepository.getOne(id);
         }
         return null;
     }
@@ -30,14 +30,14 @@ public class KirjoittajaService {
     }
 
     public void delete(Long id) {
-        if (kirjoittajaRepository.exists(id)) {
-            kirjoittajaRepository.delete(id);
+        if (kirjoittajaRepository.existsById(id)) {
+            kirjoittajaRepository.deleteById(id);
         }
     }
 
     public void edit(Long id, String nimi) {
-        if (kirjoittajaRepository.exists(id)) {
-            Kirjoittaja kirjoittaja = kirjoittajaRepository.findOne(id);
+        if (kirjoittajaRepository.existsById(id)) {
+            Kirjoittaja kirjoittaja = kirjoittajaRepository.getOne(id);
             kirjoittaja.setNimi(nimi);
             kirjoittajaRepository.save(kirjoittaja);
         }

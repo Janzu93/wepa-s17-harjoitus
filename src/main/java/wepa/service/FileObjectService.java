@@ -17,15 +17,15 @@ public class FileObjectService {
 
 
     public byte[] getFileContent(Long id) {
-        if (fileObjectRepository.exists(id)) {
-            return fileObjectRepository.findOne(id).getContent();
+        if (fileObjectRepository.existsById(id)) {
+            return fileObjectRepository.getOne(id).getContent();
         }
         return null;
     }
 
     public void delete(Long id) {
-        if (fileObjectRepository.exists(id)) {
-            fileObjectRepository.delete(id);
+        if (fileObjectRepository.existsById(id)) {
+            fileObjectRepository.deleteById(id);
         }
     }
 

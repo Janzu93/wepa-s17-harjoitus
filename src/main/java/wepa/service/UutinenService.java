@@ -19,8 +19,8 @@ public class UutinenService {
     }
 
     public Uutinen findOne(Long id) {
-        if (uutinenRepository.exists(id)) {
-            return uutinenRepository.findOne(id);
+        if (uutinenRepository.existsById(id)) {
+            return uutinenRepository.getOne(id);
         }
         return null;
     }
@@ -30,14 +30,14 @@ public class UutinenService {
     }
 
     public void delete(Long id) {
-        if (uutinenRepository.exists(id)) {
-            uutinenRepository.delete(id);
+        if (uutinenRepository.existsById(id)) {
+            uutinenRepository.deleteById(id);
         }
     }
 
     public void edit(Long id, String otsikko, String ingressi, String sisalto) {
-        if (uutinenRepository.exists(id)) {
-            Uutinen uutinen = uutinenRepository.findOne(id);
+        if (uutinenRepository.existsById(id)) {
+            Uutinen uutinen = uutinenRepository.getOne(id);
             uutinen.setOtsikko(otsikko);
             uutinen.setIngressi(ingressi);
             uutinen.setSisalto(sisalto);

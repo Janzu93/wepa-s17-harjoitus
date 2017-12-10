@@ -6,6 +6,8 @@
 <body>
     <h1>Luo uusi uutinen</h1>
     <form th:action="@{/uutiset/uusi}" method="post" enctype="multipart/form-data">
+        <label>Kirjoittajat:</label>
+        <input type="text" name="kirjoittajat"/>
         <label>Otsikko:</label>
         <input type="text" name="otsikko"/>
         <label>Ingressi:</label>

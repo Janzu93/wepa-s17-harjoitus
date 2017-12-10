@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 <head>
     <title>Uutiset</title>
 </head>
 <body>
 <ul>
     <li th:each="uutinen : ${uutiset}">
-        <span th:text="${uutinen.otsikko}"></span>
-        <span th:text="${uutinen.ingressi}"></span>
-        <span th:text="${uutinen.sisalto}"></span>
-        <span th:text="${uutinen.julkaisupaiva}"></span>
+        <p th:text="@{Julkaistu:} + ' ' + ${uutinen.julkaisupaiva}"></p>
+        <h1 th:text="${uutinen.otsikko}"></h1>
+        <h2 th:text="${uutinen.ingressi}"></h2>
+        <p th:text="${uutinen.sisalto}"></p>
+        <p>Kirjoittajat</p>
+        <ul>
+            <li th:each="kirjoittaja : ${uutinen.kirjoittajat}">
+                <span th:text="${kirjoittaja.nimi}"></span>
+            </li>
+        </ul>
         <img th:src="@{/images/} + ${uutinen.id-1}"/>
         <form th:action="@{/uutiset/} + ${uutinen.id} + @{/delete}" method="post">
             <input type="submit" value="Poista!"/>

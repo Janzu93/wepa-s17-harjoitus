@@ -69,10 +69,10 @@ public class UutinenController {
      */
     @PostMapping("/uutiset/uusi")
     @Transactional
-    public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto, @RequestParam("file") MultipartFile file) throws IOException{
+    public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto, @RequestParam("file") MultipartFile file, @RequestParam String kirjoittajat) throws IOException{
         fileObjectService.save(file);
-        uutinenService.create(otsikko, ingressi, sisalto);
-        return "redirect:/uutiset";
+        uutinenService.create(otsikko, ingressi, sisalto, kirjoittajat);
+        return "redirect:/uutiset/sivu/0";
     }
 
     /*
@@ -84,7 +84,7 @@ public class UutinenController {
     public String poista(@PathVariable Long id) {
         uutinenService.delete(id);
         fileObjectService.delete(id-1);
-        return "redirect:/uutiset";
+        return "redirect:/uutiset/sivu/0";
     }
 
     /*
@@ -102,6 +102,6 @@ public class UutinenController {
     @PostMapping("/uutiset/{id}/muokkaa")
     public String muokkaa(@PathVariable Long id, @RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto) {
         uutinenService.edit(id, otsikko, ingressi, sisalto);
-        return "redirect:/uutiset";
+        return "redirect:/uutiset/sivu/0";
     }
 }

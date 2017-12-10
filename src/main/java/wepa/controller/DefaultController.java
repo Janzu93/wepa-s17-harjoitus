@@ -9,7 +9,7 @@ public class DefaultController {
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/uutiset/sivu/0";
+        return "index";
     }
 
     @GetMapping("*")

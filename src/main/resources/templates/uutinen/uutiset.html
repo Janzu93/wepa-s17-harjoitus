@@ -18,6 +18,14 @@
             <input type="submit" value="Muokkaa"/>
         </form>
     </li>
+    <form th:if="${sivujaJaljella}"
+          th:action="@{/uutiset/sivu/} + ${pageable.pageNumber+1}" method="get">
+        <input type="submit" value="Seuraava!"/>
+    </form>
+    <form th:if="${pageable.hasPrevious()}"
+          th:action="@{/uutiset/sivu/} + ${pageable.pageNumber-1}" method="get">
+        <input type="submit" value="Edellinen!">
+    </form>
 </ul>
 </body>
 </html>

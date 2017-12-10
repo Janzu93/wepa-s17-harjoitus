@@ -43,9 +43,22 @@ public class UutinenController {
 
     @GetMapping("/uutiset")
     public String uutinenList(Model model) {
-        model.addAttribute("uutiset", uutinenService.findAll());
+        Pageable pageable = PageRequest.of(0,5, Sort.Direction.DESC,"julkaisupaiva");
+        model.addAttribute("pageable", pageable);
+        model.addAttribute("sivujaJaljella", (pageable.getPageNumber()+1) * 5 < uutinenRepository.count());
+        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
         return "uutinen/uutiset";
     }
+
+    @GetMapping("/uutiset/sivu/{sivuNumero}")
+    public String uutinenList(Model model, @PathVariable int sivuNumero) {
+        Pageable pageable = PageRequest.of(sivuNumero,5, Sort.Direction.DESC,"julkaisupaiva");
+        model.addAttribute("pageable", pageable);
+        model.addAttribute("sivujaJaljella", (pageable.getPageNumber()+1) * 5 < uutinenRepository.count());
+        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
+        return "uutinen/uutiset";
+    }
+
 
     @PostMapping("/uutiset/uusi")
     @Transactional

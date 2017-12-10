@@ -21,6 +21,4 @@ public class FileObject extends AbstractPersistable<Long>{
     @Basic(fetch = FetchType.LAZY)
     private byte[] content;
 
-    @OneToOne
-    private Uutinen uutinen;
 }

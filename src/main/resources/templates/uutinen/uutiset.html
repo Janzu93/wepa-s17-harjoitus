@@ -10,7 +10,7 @@
         <span th:text="${uutinen.ingressi}"></span>
         <span th:text="${uutinen.sisalto}"></span>
         <span th:text="${uutinen.julkaisupaiva}"></span>
-        <img th:src="@{/images/} + ${uutinen.id}"/>
+        <img th:src="@{/images/} + ${uutinen.id-1}"/>
         <form th:action="@{/uutiset/} + ${uutinen.id} + @{/delete}" method="post">
             <input type="submit" value="Poista!"/>
         </form>

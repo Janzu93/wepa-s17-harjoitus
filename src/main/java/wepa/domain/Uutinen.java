@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,6 @@ public class Uutinen extends AbstractPersistable<Long> {
 
     private String otsikko;
     private String ingressi;
-    private FileObject kuva;
 
     private String sisalto;
     private LocalDate julkaisupaiva;

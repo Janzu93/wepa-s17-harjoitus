@@ -3,7 +3,7 @@ deploy:
   provider: heroku
   api_key:
     secure: AR97nGoznMJDav2YCTuO/TU/VgKbAeY+PR8RQXXCNEGW6T6XOfADgbZ3pvu/w77rcNbuvOJ3/eHGmkD/pW3Zo7u+uPGRDWrRE9AslSxY8kFB2EgtW61MLrif3OzHnnd11n2DxxbLPT7eINeUI0aMDdp9Tn8uRksCM9EjBHa+jGuNTv3jMsR8ZRkKOdqPs/0d8vju1Ye2cGnqW5+luhtbtrqN3jVfE2neD03szxulADpRzuWy5c4OlF+aGtsECE0NJdl3+x9t3OYiPh252Fg7TxIiLLi7PbdBAfc06a+IahOwxXVf69l6W6IiJlNu9IgsieQBLyhJb1JIJhSlJDuBl6TF1HtJ/meU7maBOa8m3v7HIYtxS+2SQApKnYxneBGT3vwDiBigwHHYDaHafcfxZAGh8MgxHbWd64JJ2gGHKrljOrQWBZuxw//6CZtE+f63WD+nWmsvNBPbtTJ1indxf/5E9UlAuzMXIXOTP1mO4HB8o9qo5wqp4Ferug11VnXdrgHDMXGHayCqSL1BeX5QwL9bziA3Z2xq+WNl29h9gxtW1JIXUpBH7xcTmNNEH0m6j2thjm2BXjjSJSDxdHMIbQezrCgKVT6q8H43ZI+1VRin87LM7Z+nYI8CF9HugASRRVQj/qzI/XV3nwT0pi/DjkWUmv30Ia50LjB2Ksjhk6I=
-  app: wepa-s17-harjoitus
+  app: lofhjann-wepa
   on:
     repo: Janzu93/wepa-s17-harjoitus
     branch: devel

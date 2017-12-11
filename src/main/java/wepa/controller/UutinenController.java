@@ -83,9 +83,10 @@ public class UutinenController {
      */
     @PostMapping("/uutiset/uusi")
     @Transactional
-    public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto, @RequestParam("file") MultipartFile file, @RequestParam String kirjoittajat) throws IOException {
+    public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto,
+                      @RequestParam("file") MultipartFile file, @RequestParam String kirjoittajat, @RequestParam String kategoriat) throws IOException {
         fileObjectService.save(file);
-        uutinenService.create(otsikko, ingressi, sisalto, kirjoittajat);
+        uutinenService.create(otsikko, ingressi, sisalto, kirjoittajat, kategoriat);
         return "redirect:/uutiset/sivu/0/otsikko/asc";
     }
 

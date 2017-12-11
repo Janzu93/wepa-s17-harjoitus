@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import wepa.domain.Kategoria;
+import wepa.domain.Uutinen;
 import wepa.repository.UutinenRepository;
 import wepa.service.FileObjectService;
+import wepa.service.KategoriaService;
 import wepa.service.UutinenService;
 
 import java.io.IOException;
@@ -97,6 +100,7 @@ public class UutinenController {
     @PostMapping("/uutiset/{id}/delete")
     @Transactional
     public String poista(@PathVariable Long id) {
+
         uutinenService.delete(id);
         fileObjectService.delete(id - 1);
         return "redirect:/uutiset/sivu/0/otsikko/asc";

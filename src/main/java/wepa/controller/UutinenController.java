@@ -77,6 +77,8 @@ public class UutinenController {
         model.addAttribute("pageable", pageable);
         model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
         model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
+        model.addAttribute("sort", sort);
+        model.addAttribute("suunta", suunta);
         return "uutinen/uutiset";
     }
 

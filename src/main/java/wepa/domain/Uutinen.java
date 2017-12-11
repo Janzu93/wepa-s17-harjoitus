@@ -8,9 +8,10 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,11 @@ import java.util.List;
 public class Uutinen extends AbstractPersistable<Long> {
 
     private String otsikko;
+
+    @Column(length = 5000)
     private String ingressi;
 
+    @Column(length = 10000)
     private String sisalto;
     private LocalDate julkaisupaiva;
 

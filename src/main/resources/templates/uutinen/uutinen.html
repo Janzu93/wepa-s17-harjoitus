@@ -6,7 +6,7 @@
 <body>
     <h3 th:text="${uutinen.julkaisupaiva}"></h3>
     <ul>
-        <li th:each="kirjoittaja : ${uutinen.kirjoittajat}"></li>
+        <li th:each="kirjoittaja : ${kirjoittajat}"></li>
     </ul>
     <h1 th:text="${uutinen.otsikko}"></h1>
     <h2 th:text="${uutinen.ingressi}"></h2>

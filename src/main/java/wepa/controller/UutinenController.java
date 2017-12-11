@@ -124,6 +124,7 @@ public class UutinenController {
     @GetMapping("/uutiset/{id}")
     public String uutinen(Model model, @PathVariable Long id) {
         model.addAttribute("uutinen", uutinenService.findOne(id));
+        model.addAttribute("kirjoittajat", uutinenService.findOne(id).getKirjoittajat());
         return "uutinen/uutinen";
     }
 }

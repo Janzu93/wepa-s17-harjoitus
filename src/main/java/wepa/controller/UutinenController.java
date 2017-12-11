@@ -19,6 +19,7 @@ import wepa.service.UutinenService;
 import java.io.IOException;
 
 @Controller
+@Transactional
 public class UutinenController {
 
     @Autowired

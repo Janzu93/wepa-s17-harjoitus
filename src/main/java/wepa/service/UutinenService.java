@@ -81,6 +81,7 @@ public class UutinenService {
         }
     }
 
+
     public void create(String otsikko, String ingressi, String sisalto, String kirjoittajat, String kategoriat) {
         Uutinen uutinen = new Uutinen(otsikko, ingressi, sisalto, LocalDate.now());
         uutinenRepository.save(uutinen);

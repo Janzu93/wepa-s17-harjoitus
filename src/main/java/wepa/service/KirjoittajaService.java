@@ -3,6 +3,7 @@ package wepa.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wepa.domain.Kirjoittaja;
+import wepa.domain.Uutinen;
 import wepa.repository.KirjoittajaRepository;
 
 import java.util.List;

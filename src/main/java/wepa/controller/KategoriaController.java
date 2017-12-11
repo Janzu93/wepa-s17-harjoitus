@@ -21,6 +21,7 @@ public class KategoriaController {
     public String kategoriaList(Model model) {
         model.addAttribute("kategoriat", kategoriaService.findAll());
 
+
         return "kategoria/kategoriat";
     }
 
@@ -32,6 +33,7 @@ public class KategoriaController {
     @GetMapping("/kategoriat/{id}/muokkaa")
     public String muokkausSivu(Model model, @PathVariable Long id) {
         model.addAttribute("kategoria", kategoriaService.findOne(id));
+        model.addAttribute("kategoriat", kategoriaService.findAll());
         return "kategoria/muokkaaKategoria";
     }
 

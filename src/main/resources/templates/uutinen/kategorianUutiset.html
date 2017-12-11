@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${kategoria.nimi}"></title>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<h3 th:text="${kategoria.nimi}"></h3>
+<ul>
+    <li th:each="uutinen : ${uutiset}">
+        <a th:href="@{/uutiset/} + ${uutinen.id}"><p th:text="${uutinen.julkaisupaiva} + ' - ' + ${uutinen.otsikko}"></p></a>
+    </li>
+    <form th:if="${sivujaJaljella}"
+          th:action="@{/kategoria/} + ${pageable.pageNumber+1} + '/' + ${kategoria.nimi}" method="get">
+        <input type="submit" value="Seuraava!"/>
+    </form>
+    <form th:if="${pageable.hasPrevious()}"
+          th:action="@{/kategoria/} + ${pageable.pageNumber-1} + '/' + ${kategoria.nimi}" method="get">
+        <input type="submit" value="Edellinen!">
+    </form>
+</ul>
+</body>
+</html>

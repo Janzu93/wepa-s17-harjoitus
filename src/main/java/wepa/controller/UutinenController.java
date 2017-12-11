@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import wepa.domain.Kategoria;
 import wepa.domain.Uutinen;
+import wepa.repository.KategoriaRepository;
 import wepa.repository.UutinenRepository;
 import wepa.service.FileObjectService;
 import wepa.service.KategoriaService;
@@ -34,6 +35,9 @@ public class UutinenController {
     @Autowired
     private FileObjectService fileObjectService;
 
+    @Autowired
+    private KategoriaService kategoriaService;
+
     /*
         Tätä metodia kutsutaan kun tarvitaan tieto ollaanko viimeisellä sivulla.
         Algoritmi toimii niin että pageablelta pyydettyyn sivunumeroon (0-indeksöity) lisätään 1
@@ -52,7 +56,8 @@ public class UutinenController {
 
     @GetMapping("/")
     public String etusivu(Model model) {
-        Pageable pageable = PageRequest.of(0,5,Sort.Direction.DESC, "id");
+        Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "id");
+        model.addAttribute("kategoriat", kategoriaService.findAll());
         model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
 
         return "index";
@@ -74,6 +79,7 @@ public class UutinenController {
         } else {
             pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, sort);
         }
+        model.addAttribute("kategoriat", kategoriaService.findAll());
         model.addAttribute("pageable", pageable);
         model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
         model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
@@ -114,7 +120,18 @@ public class UutinenController {
     @GetMapping("/uutiset/{id}/muokkaa")
     public String muokkausSivu(Model model, @PathVariable Long id) {
         model.addAttribute("uutinen", uutinenService.findOne(id));
+        model.addAttribute("kategoriat", kategoriaService.findAll());
         return "uutinen/muokkaaUutinen";
+    }
+
+    @GetMapping("/kategoria/{sivunumero}/{nimi}")
+    public String uutisetKategorialla(Model model, @PathVariable int sivuNumero, @PathVariable String nimi) {
+        Pageable pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, "id");
+        model.addAttribute("kategoriat", kategoriaService.findAll());
+        model.addAttribute("pageable", pageable);
+        model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
+        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
+        return "uutinen/kategorianUutiset";
     }
 
     /*
@@ -129,6 +146,7 @@ public class UutinenController {
     @GetMapping("/uutiset/{id}")
     public String uutinen(Model model, @PathVariable Long id) {
         model.addAttribute("uutinen", uutinenService.findOne(id));
+        model.addAttribute("kategoriat", kategoriaService.findAll());
         return "uutinen/uutinen";
     }
 }

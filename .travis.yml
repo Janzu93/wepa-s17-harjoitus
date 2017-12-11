@@ -6,4 +6,4 @@ deploy:
   app: lofhjann-wepa
   on:
     repo: Janzu93/wepa-s17-harjoitus
-    branch: devel
+    branch: master

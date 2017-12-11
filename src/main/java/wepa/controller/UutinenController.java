@@ -83,7 +83,6 @@ public class UutinenController {
         Tiedosto lähetetään fileObjectServicelle tallennettavaksi.
      */
     @PostMapping("/uutiset/uusi")
-    @Transactional
     public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto,
                       @RequestParam("file") MultipartFile file, @RequestParam String kirjoittajat, @RequestParam String kategoriat) throws IOException {
         fileObjectService.save(file);

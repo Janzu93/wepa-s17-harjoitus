@@ -127,7 +127,7 @@ public class UutinenController {
         return "uutinen/muokkaaUutinen";
     }
 
-    @GetMapping("/kategoria/{sivunNumero}/{nimi}")
+    @GetMapping("/kategoria/{sivuNumero}/{nimi}")
     public String uutisetKategorialla(Model model, @PathVariable int sivuNumero, @PathVariable String nimi) {
         Pageable pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, "id");
         model.addAttribute("kategoriat", kategoriaService.findAll());

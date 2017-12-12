@@ -131,9 +131,10 @@ public class UutinenController {
     public String uutisetKategorialla(Model model, @PathVariable int sivuNumero, @PathVariable String nimi) {
         Pageable pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, "id");
         model.addAttribute("kategoria", kategoriaService.findByNimi(nimi).get(0));
+        model.addAttribute("kategoriat", kategoriaService.findAll());
         model.addAttribute("pageable", pageable);
         model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
-        model.addAttribute("uutiset", uutinenRepository.findAll(pageable));
+        model.addAttribute("uutiset", kategoriaService.findUutisetByNimi(nimi));
         return "uutinen/kategorianUutiset";
     }
 

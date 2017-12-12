@@ -7,8 +7,9 @@
 <body>
 <ul>
     <li th:each="uutinen : ${uutiset}">
-        <a th:href="@{/uutiset/} + ${uutinen.id}" th:text="${uutinen.otsikko}"></a>
         <img th:src="@{/images/} + ${uutinen.id-1}"/>
+        <br><br>
+        <a th:href="@{/uutiset/} + ${uutinen.id}" th:text="${uutinen.otsikko}"></a>
     </li>
 </ul>
 </body>

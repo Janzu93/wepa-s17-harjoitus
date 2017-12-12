@@ -7,10 +7,7 @@
 <body>
 <ul>
     <li th:each="uutinen : ${uutiset}">
-        <span th:text="${uutinen.otsikko}"></span>
-        <span th:text="${uutinen.ingressi}"></span>
-        <span th:text="${uutinen.sisalto}"></span>
-        <span th:text="${uutinen.julkaisupaiva}"></span>
+        <a th:href="/uutiset/${uutinen.id}" th:text="${uutinen.otsikko}"></a>
         <img th:src="@{/images/} + ${uutinen.id-1}"/>
     </li>
 </ul>

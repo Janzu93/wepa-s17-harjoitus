@@ -130,7 +130,7 @@ public class UutinenController {
     @GetMapping("/kategoria/{sivuNumero}/{nimi}")
     public String uutisetKategorialla(Model model, @PathVariable int sivuNumero, @PathVariable String nimi) {
         Pageable pageable = PageRequest.of(sivuNumero, 5, Sort.Direction.DESC, "id");
-        model.addAttribute("kategoria", kategoriaService.findByNimi(nimi));
+        model.addAttribute("kategoria", kategoriaService.findByNimi(nimi).get(0));
         model.addAttribute("pageable", pageable);
         model.addAttribute("sivujaJaljella", (sivujaJaljella(pageable)));
         model.addAttribute("uutiset", uutinenRepository.findAll(pageable));

@@ -96,8 +96,11 @@ public class UutinenController {
     @PostMapping("/uutiset/uusi")
     public String luo(@RequestParam String otsikko, @RequestParam String ingressi, @RequestParam String sisalto,
                       @RequestParam("file") MultipartFile file, @RequestParam String kirjoittajat, @RequestParam String kategoriat) throws IOException {
-        fileObjectService.save(file);
-        uutinenService.create(otsikko, ingressi, sisalto, kirjoittajat, kategoriat);
+
+        if (file.getContentType().equals("image/png")) {
+            fileObjectService.save(file);
+            uutinenService.create(otsikko, ingressi, sisalto, kirjoittajat, kategoriat);
+        }
         return "redirect:/uutiset/sivu/0/otsikko/asc";
     }
 

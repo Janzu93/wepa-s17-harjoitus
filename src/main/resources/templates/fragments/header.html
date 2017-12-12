@@ -47,7 +47,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="kategoriatDropdown">
                         <a th:each="kategoria : ${kategoriat}" class="dropdown-item"
-                           th:href="@{/kategoria/} + '0' + ${kategoria.nimi}" th:text="${kategoria.nimi}"></a>
+                           th:href="@{/kategoria/} + '0' + '/' + ${kategoria.nimi}" th:text="${kategoria.nimi}"></a>
                     </div>
                 </li>
                 <li class="nav-item">
